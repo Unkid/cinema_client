@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.App {
+    width: 80%;
+}
+
+.filmList{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.filmItem {
+    display: flex;
+    border: 2px solid #eb4034;
+    margin: 15px;
+    
+    align-content: center;
+    width: 50%;
+    flex-direction: column;
+}
+
+.filmHeader{
+    background-color: #eb4034;
+    color:aliceblue;
+    width: 100%;
+    padding: 5px;
+}
+
+.filmContent {
+    padding: 10px;
+}
+
+.filmBtns{
+    padding: 10px;
+}

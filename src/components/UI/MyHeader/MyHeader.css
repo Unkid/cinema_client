@@ -1,0 +1,30 @@
+.myHeader{
+    background-color: #eb4034;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px;
+}
+
+.headerOptions{
+    display: flex;
+    flex-direction: row;
+}
+
+.headerOption {
+    padding: 0 5px;
+}
+
+.headerOption:hover {
+    background-color: white;
+    color: #eb4034;
+}
+
+
+input{
+    border: 1px solid transparent;
+    background-color: white;
+    width: 100%;
+    font-size: medium;
+}

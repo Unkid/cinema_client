@@ -1,11 +1,15 @@
 import React from "react";
-import FilmItem from "./FilmItem/FilmItem";
+import FilmItem from "../FilmItem/FilmItem";
+import './FilmList.css'
 
 
 const FilmList = ({films}) => {
     if (!films.length){
         return (
-            <h1 style={{textAlign:'center'}}>Posts were not found</h1>
+            <div className='filmsNotFound'>
+                <p className='pSelect'>Таких фильмов нет(</p>
+                <img src='/images/favicon.png' alt='Не загрузилось' style={{width:'150px'}}/>
+            </div>
         )
     }    
     return (

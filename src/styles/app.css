@@ -8,18 +8,15 @@
 #root {
     display: flex;
     justify-content: center;
-    
+    background-color: whitesmoke;
+    height: 100vh;   
 }
 
 .App {
-    width: 80%;
+    width: 85%;
+    display:flex;
+    flex-direction: column;
+    background-color: white;
 }
 
-.filmList{
-    /* display:flex; */
-    /* flex-direction: row;
-    justify-content: space-between; */
-    margin-right: auto;
-    margin-left: auto;
-}
 

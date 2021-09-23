@@ -1,0 +1,25 @@
+.filterFilm{
+    display:flex;
+    flex-direction: row;
+    justify-content: start;
+    margin-top: 20px;
+    
+}
+
+.filmSearch{    
+    margin-right: 15px;
+    margin-left: 15px; 
+    border: 1.5px solid #eb4034;
+    padding: 5px;
+
+}
+
+.filterInput {
+    border: 1px solid transparent;
+    margin:5px;
+    outline: 0;
+    outline-offset: 0;
+    font-size: medium;
+}
+
+

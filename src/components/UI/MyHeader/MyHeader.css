@@ -4,16 +4,18 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    font-size: medium;
     padding: 15px;
 }
 
 .headerOptions{
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .headerOption {
-    padding: 0 5px;
+    padding: 10px;
 }
 
 .headerOption:hover {
@@ -21,10 +23,16 @@
     color: #eb4034;
 }
 
+.headerSearch{
+    padding: 5px;
+    background-color: white;
+}
 
-input{
+
+.headerInput{
     border: 1px solid transparent;
     background-color: white;
-    width: 100%;
     font-size: medium;
+    outline: none;
+    margin: 5px;
 }

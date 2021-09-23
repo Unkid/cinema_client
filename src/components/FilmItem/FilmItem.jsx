@@ -9,19 +9,15 @@ const FilmItem = (props) => {
                 <p>{props.film.title}</p>
             </div>
             <div className="filmContent">
-                <img src="/images/2.jpg" style={{width: '200px' }} alt='alternate text'/>
+                <img src={'/images/'+props.film.id+'.jpg'} style={{width: '200px' }} alt='alternate text'/>
                 <div className="filmText">
-                    <p>{props.film.genre}</p>                
+                    <p className="filmAbout">{props.film.rate} {props.film.genre} </p>                
                     <p>{props.film.description}</p>
-                </div>
-                             
-            </div>
-            <div className='filmBtns'>
-                <MyButton>Расписание и билеты</MyButton>
-            </div>
+                    <MyButton>Расписание и билеты</MyButton>                    
+                </div>                            
+            </div>           
         </div>
     )
-
 }
 
 

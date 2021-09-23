@@ -1,5 +1,5 @@
 import React from "react";
-import FilmItem from "./FilmItem";
+import FilmItem from "./FilmItem/FilmItem";
 
 
 const FilmList = ({films}) => {
@@ -7,16 +7,15 @@ const FilmList = ({films}) => {
         return (
             <h1 style={{textAlign:'center'}}>Posts were not found</h1>
         )
-    }
+    }    
     return (
-        <div className='filmList'>
-        {films.map((film, index)=>
-            <FilmItem film={film} key={film.id}/>)
+        <div className='filmList'>            
+        {
+        films.map((film)=>
+            <FilmItem film={film} key={film.id}/>)  
         }
-        </div>       
-
+        </div>  
     )
-
 }
 
 

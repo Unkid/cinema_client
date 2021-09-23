@@ -5,9 +5,9 @@ import './styles/app.css'
 
 function App() {
   const [films, setFilms] = useState([
-    {id:1, title:'Spiderman', description:'Description', genre:'Action'},
-    {id:2, title:'Inception', description:'Description', genre:'Thriller'},
-    {id:3, title:'Interstellar', description:'Description', genre:'Drama'},
+    {id:1, title:'Spiderman', description:'Description', genre:'Action', rate:7.8},
+    {id:2, title:'Inception', description:'Description', genre:'Thriller', rate:8.8},
+    {id:3, title:'Interstellar', description:'Description', genre:'Drama', rate: 8.6},
   ])
 
   const [filter, setFilter] = useState({query: ''})

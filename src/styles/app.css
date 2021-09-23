@@ -16,32 +16,10 @@
 }
 
 .filmList{
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
+    /* display:flex; */
+    /* flex-direction: row;
+    justify-content: space-between; */
+    margin-right: auto;
+    margin-left: auto;
 }
 
-.filmItem {
-    display: flex;
-    border: 2px solid #eb4034;
-    margin: 15px;
-    
-    align-content: center;
-    width: 50%;
-    flex-direction: column;
-}
-
-.filmHeader{
-    background-color: #eb4034;
-    color:aliceblue;
-    width: 100%;
-    padding: 5px;
-}
-
-.filmContent {
-    padding: 10px;
-}
-
-.filmBtns{
-    padding: 10px;
-}

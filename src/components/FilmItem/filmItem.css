@@ -1,0 +1,40 @@
+.filmItem {
+    display: flex;
+    border: 2px solid #eb4034;
+    margin-top: 15px;
+    margin-right: 15px;
+    border-radius: 10px;
+    align-content: center;
+    flex-direction: column;
+    width:calc((100% - 15px)/2);
+    float: left;
+}
+
+.filmItem:nth-child(2n+2) {
+    margin-right: 0;
+    float: right;
+  }
+
+.filmHeader{
+    background-color: #eb4034;
+    border-radius: 5px 5px 0 0;
+    color:aliceblue;
+    width: 100%;
+    padding: 5px;
+    font-size: large;
+}
+
+.filmContent {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.filmText{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+.filmBtns{
+    padding: 10px;
+}

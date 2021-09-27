@@ -2,6 +2,7 @@
 
 # dependencies
 /cinema_client/node_modules
+/cinema_server/node_modules
 /.pnp
 .pnp.js
 

@@ -4,7 +4,8 @@ const actorRouter = require('./actorRouter')
 const cinemaRouter = require('./cinemaRouter')
 const seanceRouter = require('./seanceRouter')
 const orderRouter = require('./orderRouter')
-const basketRouter = require('./basketRouter') 
+const basketRouter = require('./basketRouter')
+const directorRouter = require('./directorRouter')
 const router = new Router()
 
 router.use('/movie', movieRouter)
@@ -13,5 +14,6 @@ router.use('/cinema', cinemaRouter)
 router.use('/seance', seanceRouter)
 router.use('/order', orderRouter)
 router.use('/basket', basketRouter)
+router.use('/director', directorRouter)
 
 module.exports = router

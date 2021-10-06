@@ -4,13 +4,16 @@ const {DataTypes} = require('sequelize')
 const Movie = sequelize.define('movie', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title: {type: DataTypes.STRING, allowNull: false},
+    origTitle: {type: DataTypes.STRING, allowNull: false},
     country: {type: DataTypes.STRING, allowNull:false},
     rate: {type: DataTypes.REAL, allowNull: false, defaultValue: 5},
     description: {type: DataTypes.TEXT, allowNull: false},
     duration: {type: DataTypes.INTEGER, allowNull: false, defaultValue: 120},
+    startYear:{type: DataTypes.STRING, allowNull: false},
+    ageLimit: {type: DataTypes.STRING, allowNull: false, defaultValue: '+6'},
     startDate: {type: DataTypes.DATEONLY, allowNull: false},
-    genres: {type: DataTypes.ARRAY(DataTypes.TEXT), allowNull: false},
-    img: {type: DataTypes.STRING, allowNull: false}
+    genres: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false},
+    img: {type: DataTypes.STRING, allowNull: false, defaultValue: '1.jpg'}
 })
 
 const Actor = sequelize.define('actor', {
@@ -19,7 +22,7 @@ const Actor = sequelize.define('actor', {
     gender: {type: DataTypes.ENUM('М', 'Ж'), allowNull: false},
     birthDate: {type: DataTypes.DATEONLY, allowNull: false},
     country: {type: DataTypes.STRING, allowNull:false},
-    img: {type: DataTypes.STRING, allowNull: false} 
+    img: {type: DataTypes.STRING, allowNull: false, defaultValue: '1.jpg'} 
 })
 
 const Director = sequelize.define('director', {
@@ -28,13 +31,15 @@ const Director = sequelize.define('director', {
     gender: {type: DataTypes.ENUM('М', 'Ж'), allowNull: false},
     birthDate: {type: DataTypes.DATEONLY, allowNull: false},
     country: {type: DataTypes.STRING, allowNull:false},
-    img: {type: DataTypes.STRING, allowNull: false} 
+    img: {type: DataTypes.STRING, allowNull: false, defaultValue: '1.jpg'} 
 })
 
 const Seance = sequelize.define('seance', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     price: {type: DataTypes.INTEGER, allowNull: false, defaultValue: 200},
-    date: {type: DataTypes.DATE, allowNull: false}
+    date: {type: DataTypes.DATEONLY, allowNull: false},
+    time: {type: DataTypes.TIME, allowNull: false},
+    format: {type: DataTypes.STRING, allowNull: false, defaultValue: "2D"}
 })
 
 const Cinema = sequelize.define('cinema', {
@@ -42,7 +47,7 @@ const Cinema = sequelize.define('cinema', {
     title: {type: DataTypes.STRING, allowNull: false},
     adress: {type: DataTypes.STRING, allowNull: false},
     phone: {type: DataTypes.STRING, allowNull: false},
-    img: {type: DataTypes.STRING, allowNull: false}
+    img: {type: DataTypes.STRING, allowNull: false, defaultValue: '1.jpg'}
 })
 
 const Hall = sequelize.define('hall', {
@@ -54,7 +59,7 @@ const Hall = sequelize.define('hall', {
 
 const SelectedSeat = sequelize.define('selectedSeat', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    seats: {type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: false}
+    seats: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false}
 })
 
 const Client = sequelize.define('client', {

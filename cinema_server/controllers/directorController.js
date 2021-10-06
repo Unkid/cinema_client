@@ -1,53 +1,52 @@
 const ApiError = require("../error/ApiError")
-const {Actor, Movie} = require('../models/models')
+const {Director, Movie} = require('../models/models')
 const uuid = require('uuid')
 const path = require('path')
 const {Op} = require('sequelize')
 const {unlink, fstat} = require('fs')
 
-class ActorController{
+class DirectorController{
     async create(req,res){
         const {name, gender, birthDate, country} = req.body
         const {img} = req.files
         let fileName = uuid.v4() + '.jpg'
-        const actor = await Actor.create({name, gender, birthDate, country, img:fileName})
+        const director = await Director.create({name, gender, birthDate, country, img: fileName})
         img.mv(path.resolve(__dirname, '..', 'static', fileName))
-        return res.json(actor)
+        return res.json (director)
     }    
 
     async getOne(req,res, next){
         const {id} = req.params
-        const actor = await Actor.findOne(
+        const director = await Director.findOne(
             {where: {id},
              include:{model: Movie,
                        attributes: ['title', 'img'], 
                        through: {attributes: [] }
-                     }                     
+                      }                     
             }
         );
-        if (actor === null) {
+        if (director === null) {
             return next(ApiError.badRequest('Неверно указан ID'))
         }
         else {
-            return res.json(actor) 
+            return res.json (director) 
         }
-
     }
-
+            
     async deleteOne(req,res, next){
         const {id} = req.params
-        const actor = await Actor.findByPk(id);
-        if (actor === null) {
+        const director = await Director.findByPk(id);
+        if (director === null) {
             return next(ApiError.badRequest('Неверно указан ID'))
         } 
         else {
-            unlink(path.resolve(__dirname, '..', 'static', actor.img), (err) => {
+            unlink(path.resolve(__dirname, '..', 'static', director.img), (err) => {
                 if(err) return next(ApiError.badRequest('Ошибка в удалении файлов'))
             })
-            await actor.destroy()
-            return res.json('Удален актер с id ' + id)        
+            await director.destroy()
+            return res.json('Удален режиссер с id ' + id)        
         }
     }
 }
 
-module.exports = new ActorController()
+module.exports = new DirectorController()

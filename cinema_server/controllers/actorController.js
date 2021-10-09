@@ -13,7 +13,23 @@ class ActorController{
         const actor = await Actor.create({name, gender, birthDate, country, img:fileName})
         img.mv(path.resolve(__dirname, '..', 'static', fileName))
         return res.json(actor)
-    }    
+    }   
+    
+    async update(req,res,next){
+        try{
+            const {id} = req.params
+            const {img} = req.files
+            let fileName = uuid.v4() + '.jpg'
+            const actor = await Actor.update({img:fileName},
+                { where: { id: id}}
+            )
+            img.mv(path.resolve(__dirname, '..', 'static', fileName))            
+            return res.json(actor)
+        }
+        catch(e){
+            next(ApiError.badRequest(e.message))
+        }
+    }
 
     async getOne(req,res, next){
         const {id} = req.params

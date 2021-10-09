@@ -1,5 +1,6 @@
 const ApiError = require("../error/ApiError")
-const {Cinema} = require('../models/models')
+const {Cinema, Seance, Movie} = require('../models/models')
+const moment = require('moment')
 const uuid = require('uuid')
 const path = require('path')
 const {Op} = require('sequelize')
@@ -13,21 +14,54 @@ class CinemaController{
         const cinema = await Cinema.create({title, adress, phone, fileName})
         img.mv(path.resolve(__dirname, '..', 'static', fileName))
         return res.json(cinema)
-    } 
+    }
+    
+    async update(req,res,next){
+        try{
+            const {id} = req.params
+            const {img} = req.files
+            let fileName = uuid.v4() + '.jpg'
+            const cinema = await Cinema.update({img:fileName},
+                { where: { id: id}}
+            )
+            img.mv(path.resolve(__dirname, '..', 'static', fileName))            
+            return res.json(cinema)
+
+        }
+        catch(e){
+            next(ApiError.badRequest(e.message))
+        }
+    }
 
     async getAll(req,res){
-        const cinemas = await Cinema.findAll()
-        return res.json(cinemas)        
+        let {page, limit} = req.query
+        page = page || 1
+        limit = limit || 8
+        let offset = page*limit - limit
+        const cinemas = await Cinema.findAndCountAll({limit, offset})
+        return res.json(cinemas)      
     }       
 
     async getOne(req,res, next){
         const {id} = req.params
-        const cinema = await Cinema.findByPk(id);
+        let {date} = req.query
+        if (!date) {
+            date = moment().format('YYYY-MM-DD')
+        }
+        const cinema = await Cinema.findOne(
+            {where: {id}})
+        const seances = await cinema.getSeances({
+            where: {date: date},
+            attributes:['price', 'time', 'format'],
+            include: {
+                model: Movie,
+                attributes: ['title', 'img', 'ageLimit'] } 
+            })
         if (cinema === null) {
-            return next(ApiError.badRequest('Неверно указан ID'))
+            return next(ApiError.badRequest('Упс, кинотеатр не найден'))
         }
         else {
-            return res.json(cinema) 
+            return res.json({cinema, seances}) 
         }
     }
 

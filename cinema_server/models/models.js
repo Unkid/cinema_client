@@ -94,6 +94,9 @@ Seance.belongsTo(Hall)
 Cinema.hasMany(Seance)
 Seance.belongsTo(Cinema)
 
+Cinema.hasMany(Hall)
+Hall.belongsTo(Cinema)
+
 Seance.hasMany(SelectedSeat)
 SelectedSeat.belongsTo(Seance)
 

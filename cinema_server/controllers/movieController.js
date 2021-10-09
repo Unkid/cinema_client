@@ -1,8 +1,8 @@
 const ApiError = require("../error/ApiError")
-const {Movie, Director, Actor} = require('../models/models')
+const {Movie, Director, Seance, Cinema, Actor} = require('../models/models')
 const uuid = require('uuid')
 const path = require('path')
-const {Op} = require('sequelize')
+const {Op, where} = require('sequelize')
 const {unlink, fstat} = require('fs')
 
 class MovieController{
@@ -37,6 +37,23 @@ class MovieController{
         }        
     }
 
+    async update(req,res,next){
+        try{
+            const {id} = req.params
+            const {img} = req.files
+            let fileName = uuid.v4() + '.jpg'
+            const movie = await Movie.update({img:fileName},
+                { where: { id: id}}
+            )
+            img.mv(path.resolve(__dirname, '..', 'static', fileName))            
+            return res.json(movie)
+
+        }
+        catch(e){
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
     async getAll(req,res){        
         let {genre, page, limit} = req.query
         page = page || 1
@@ -57,6 +74,10 @@ class MovieController{
 
     async getOne(req, res, next){
         const {id} = req.params
+        const {date} = req.query
+        if (!date) {
+            date = moment().format('YYYY-MM-DD')
+        }
         const movie = await Movie.findOne(
             {where: {id},
              include:[{model: Director,
@@ -65,14 +86,23 @@ class MovieController{
                       },
                      {model: Actor,
                       attributes:['name'],
-                      through: {attributes: []}}]
+                      through: {attributes: []}
+                    }
+                ]
             }
         )
+        const seances = await movie.getSeances({
+            where: {date: date},
+            attributes:['price', 'time', 'format'],
+            include: {
+                model: Cinema,
+                attributes: ['title'] } 
+            })
         if (movie === null) {
-            return next(ApiError.badRequest('Неверно указан ID'))
+            return next(ApiError.badRequest('Упс, фильм не найден'))
         }
         else {
-            return res.json (movie) 
+            return res.json ({movie, seances}) 
         }
     }
 

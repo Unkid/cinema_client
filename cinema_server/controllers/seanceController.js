@@ -37,9 +37,10 @@ class SeanceController{
                         ]                    
                 }
             )
+            if (seance===null)
+                return next(ApiError.badRequest('Упс, сеанс не найден'))
             return res.json(seance)
         }
-        // сделать проверку seance==null
         catch(e){
             return next(ApiError.badRequest('Упс, сеанс не найден'))
         }

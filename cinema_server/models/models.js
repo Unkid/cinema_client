@@ -100,9 +100,6 @@ Hall.belongsTo(Cinema)
 Seance.hasMany(SelectedSeat)
 SelectedSeat.belongsTo(Seance)
 
-Client.hasMany(SelectedSeat)
-SelectedSeat.belongsTo(Client)
-
 Seance.hasMany(Order)
 Order.belongsTo(Seance)
 

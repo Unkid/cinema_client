@@ -3,7 +3,6 @@ const {Cinema, Seance, Movie} = require('../models/models')
 const moment = require('moment')
 const uuid = require('uuid')
 const path = require('path')
-const {Op} = require('sequelize')
 const {unlink, fstat} = require('fs')
 
 class CinemaController{
@@ -57,6 +56,11 @@ class CinemaController{
                 model: Movie,
                 attributes: ['title', 'img', 'ageLimit'] } 
             })
+        let nowTime = moment().add(-15,'minutes').format('HH:mm:ss')
+        let pastTime = moment().format('HH:mm:ss')
+        console.log(nowTime)
+        console.log(seances[1].time)
+        console.log(nowTime<=pastTime)
         if (cinema === null) {
             return next(ApiError.badRequest('Упс, кинотеатр не найден'))
         }

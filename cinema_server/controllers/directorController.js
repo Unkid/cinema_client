@@ -2,7 +2,6 @@ const ApiError = require("../error/ApiError")
 const {Director, Movie} = require('../models/models')
 const uuid = require('uuid')
 const path = require('path')
-const {Op} = require('sequelize')
 const {unlink, fstat} = require('fs')
 
 class DirectorController{

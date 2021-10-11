@@ -59,7 +59,8 @@ const Hall = sequelize.define('hall', {
 
 const SelectedSeat = sequelize.define('selectedSeat', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    seats: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false}
+    seats: {type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false},
+    createdAt: {type: DataTypes.DATE, allowNull:false, defaultValue: sequelize.literal('CURRENT_TIMESTAMP')}
 })
 
 const Client = sequelize.define('client', {

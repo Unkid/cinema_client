@@ -1,6 +1,7 @@
 const ApiError = require("../error/ApiError")
-const {Seance, Movie, Hall, Cinema} = require('../models/models')
-
+const {Seance, Movie, Hall, Cinema, SelectedSeat} = require('../models/models')
+const moment = require('moment')
+const {Op, where} = require('sequelize')
 class SeanceController{
     async create(req,res,next){
         try{
@@ -33,16 +34,22 @@ class SeanceController{
                          {model: Movie,
                           attributes:['title', 'ageLimit', 'duration']},
                          {model: Cinema,
-                            attributes:['title']}
+                            attributes:['title']}  
                         ]                    
                 }
             )
+            const today = moment().utc().add(-2, 'hours')
+            console.log(today)
+            await SelectedSeat.destroy({
+                where: {createdAt:{ [Op.lt]: today} }
+            })
+            const selectedSeats = await seance.getSelectedSeats({attributes: ['seats']})
             if (seance===null)
                 return next(ApiError.badRequest('Упс, сеанс не найден'))
-            return res.json(seance)
+            return res.json({seance, selectedSeats})
         }
         catch(e){
-            return next(ApiError.badRequest('Упс, сеанс не найден'))
+            return next(ApiError.badRequest(e.message))
         }
 
     }

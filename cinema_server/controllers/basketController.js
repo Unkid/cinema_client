@@ -5,11 +5,19 @@ class BasketController{
     async create(req,res,next){
         try{
             const {seats, seanceId} = req.body
-            const basket = await SelectedSeat.create({seats, seanceId})
-            return res.json(basket)
+            const basket = await SelectedSeat.findOne({
+                where: {seats, seanceId}
+            })
+            if (!basket){
+                basket = await SelectedSeat.create({seats, seanceId})
+                return res.json(basket)
+            }
+            else
+                return next(ApiError.badRequest("Места уже заняты"))
+                
         }
         catch(e){
-            next(ApiError.badRequest(e.message))
+            return next(ApiError.badRequest(e.message))
         }
     }
     
